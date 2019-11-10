@@ -44,7 +44,7 @@ jobs:
         - powershell -ExecutionPolicy ByPass -File tests/travis-bootstrap-ansible.ps1
         - wsl ansible --version
         # Create ansible.cfg with correct roles_path
-        - powershell -Command echo "[defaults]`nroles_path=../" | Out-File ansbile.cfg
+        - powershell -Command echo '[defaults]`nroles_path=../' | Out-File ansbile.cfg
       script:
         # Basic role syntax check
         - wsl ls -lachs
