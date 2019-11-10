@@ -43,15 +43,13 @@ jobs:
       install:
         - powershell -ExecutionPolicy ByPass -File tests/travis-bootstrap-ansible.ps1
         - wsl ansible --version
-        # Create ansible.cfg with correct roles_path
-        - powershell -Command "echo '[defaults]`nroles_path=../' | Out-File ansbile.cfg"
       script:
         # Basic role syntax check
         - wsl ls -lachs
         - wsl cat ansible.cfg
-        - wsl ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+        - wsl ansible-playbook tests/test.yml -i tests/inventory --syntax-check --roles-path ../
         # Running tests
-        - wsl ansible-playbook tests/test.yml -i tests/inventory --extra-vars "ansible_user=ansible ansible_password=Ans1ble_User! ansible_connection=winrm ansible_winrm_server_cert_validation=ignore ansible_ssh_port=5986"
+        - wsl ansible-playbook tests/test.yml -i tests/inventory --roles-path ../ --extra-vars "ansible_user=ansible ansible_password=Ans1ble_User! ansible_connection=winrm ansible_winrm_server_cert_validation=ignore ansible_ssh_port=5986"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
