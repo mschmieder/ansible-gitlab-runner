@@ -39,7 +39,7 @@ jobs:
         # Running tests
         - ansible-playbook tests/test.yml -i tests/inventory
     - os: windows
-      language: generic
+      language: shell
       install:
         - powershell -ExecutionPolicy ByPass -File tests/travis-bootstrap-ansible.ps1
         - wsl ansible --version
